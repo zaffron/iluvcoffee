@@ -8,7 +8,6 @@ import { Coffee } from './entities/coffee.entity';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { Flavor } from './entities/flavor.entity';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
-import { take } from 'rxjs';
 
 @Injectable()
 export class CoffeesService {
