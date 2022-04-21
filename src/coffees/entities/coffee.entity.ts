@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { Flavor } from './flavor.entity';
 
 @Entity() // sql table === 'coffee' if you want to use 'plural work just type that inside the entity method like @Entity('coffees')
 export class Coffee {
@@ -11,6 +19,10 @@ export class Coffee {
   @Column()
   brand: string;
 
-  @Column('json', { nullable: true })
+  @JoinTable() // 👈 Join the 2 tables - only the OWNER-side does this
+  @ManyToMany(
+    () => Flavor,
+    (flavor) => flavor.coffees, // what is "coffee" within Flavor entity
+  )
   flavors: string[];
 }
