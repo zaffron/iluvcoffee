@@ -15,6 +15,10 @@ async function bootstrap() {
       // also performs primitive type conversion like bool and number
       // But this comes with the cost of performance, so make sure you have negligible performance issue before proceeding
       transform: true,
+      transformOptions: {
+        // We no longer have to specify types with type decorator in dto
+        enableImplicitConversion: true,
+      },
     }),
   );
   await app.listen(3000);
