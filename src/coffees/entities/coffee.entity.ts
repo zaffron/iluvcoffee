@@ -22,7 +22,10 @@ export class Coffee {
   @JoinTable() // 👈 Join the 2 tables - only the OWNER-side does this
   @ManyToMany(
     () => Flavor,
-    (flavor) => flavor.coffees, // what is "coffee" within Flavor entity
+    (flavor) => flavor.coffees, // what is "coffee" within Flavor entity,
+    {
+      cascade: true, // ['insert']
+    },
   )
-  flavors: string[];
+  flavors: Flavor[];
 }
