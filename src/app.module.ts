@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
+import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CoffeesModule } from './coffees/coffees.module';
       // ensures our typeorm entities are sync with the database everytime we run our application. This is great for development. !!!Disable this on production!!!
       // synchronize: true,
     }),
+    CoffeeRatingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
