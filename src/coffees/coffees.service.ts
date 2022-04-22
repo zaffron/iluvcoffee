@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
@@ -17,7 +17,7 @@ export class CoffeesService {
     private readonly coffeeRepository: Repository<Coffee>,
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
-    private readonly dataSource: DataSource,
+    private readonly connection: Connection,
   ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
@@ -81,7 +81,7 @@ export class CoffeesService {
   }
 
   async recommendCoffee(coffee: Coffee) {
-    const queryRunner = this.dataSource.createQueryRunner();
+    const queryRunner = this.connection.createQueryRunner();
 
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -105,7 +105,7 @@ export class CoffeesService {
   }
 
   private async preloadFlavorByName(name: string): Promise<Flavor> {
-    const existingFlavor = await this.flavorRepository.findOneBy({ name });
+    const existingFlavor = await this.flavorRepository.findOne({ name });
     if (existingFlavor) {
       return existingFlavor;
     }
