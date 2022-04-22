@@ -18,7 +18,7 @@ import { CoffeesModule } from './coffees/coffees.module';
       // this help load modules automatically instead of specifying in entities array
       autoLoadEntities: true,
       // ensures our typeorm entities are sync with the database everytime we run our application. This is great for development. !!!Disable this on production!!!
-      synchronize: true,
+      // synchronize: true,
     }),
   ],
   controllers: [AppController],
