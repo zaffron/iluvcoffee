@@ -12,7 +12,7 @@ import { DatabaseModule } from './database/database.module';
   imports: [
     ConfigModule.forRoot({
       // envFilePath: '.environment',
-      ignoreEnvFile: true,
+      // ignoreEnvFile: true,
     }),
     CoffeesModule,
     TypeOrmModule.forRoot({
