@@ -11,7 +11,8 @@ import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.environment',
+      // envFilePath: '.environment',
+      ignoreEnvFile: true,
     }),
     CoffeesModule,
     TypeOrmModule.forRoot({
