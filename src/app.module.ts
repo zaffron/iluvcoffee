@@ -12,6 +12,20 @@ import appConfig from './config/app.config';
 
 @Module({
   imports: [
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'postgres',
+        host: process.env.DATABASE_HOST || 'localhost',
+        port: +process.env.DATABASE_PORT || 5432,
+        username: process.env.DATABASE_USER || 'postgres',
+        password: process.env.DATABASE_PASSWORD || 'postgres',
+        database: process.env.DATABASE_NAME || 'iluvcoffee',
+        // this help load modules automatically instead of specifying in entities array
+        autoLoadEntities: true,
+        // ensures our typeorm entities are sync with the database everytime we run our application. This is great for development. !!!Disable this on production!!!
+        // synchronize: true,
+      }),
+    }),
     ConfigModule.forRoot({
       // envFilePath: '.environment',
       // ignoreEnvFile: true,
@@ -22,18 +36,6 @@ import appConfig from './config/app.config';
       }),
     }),
     CoffeesModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DATABASE_HOST || 'localhost',
-      port: +process.env.DATABASE_PORT || 5432,
-      username: process.env.DATABASE_USER || 'postgres',
-      password: process.env.DATABASE_PASSWORD || 'postgres',
-      database: process.env.DATABASE_NAME || 'iluvcoffee',
-      // this help load modules automatically instead of specifying in entities array
-      autoLoadEntities: true,
-      // ensures our typeorm entities are sync with the database everytime we run our application. This is great for development. !!!Disable this on production!!!
-      // synchronize: true,
-    }),
     CoffeeRatingModule,
     DatabaseModule,
   ],
