@@ -23,9 +23,10 @@ export class CoffeesService {
     @Inject(COFFEE_BRANDS) coffeeBrands: string[],
     private readonly configService: ConfigService,
   ) {
-    const databaseHost = this.configService.get('database.host', 'localhost');
+    const coffeesConfig = this.configService.get('coffees');
+    // const coffeesConfig = this.configService.get('coffees.foo'); // we can also select nested object keys
     console.log(coffeeBrands);
-    console.log(databaseHost);
+    console.log(coffeesConfig);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
