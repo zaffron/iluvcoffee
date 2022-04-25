@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { Connection } from 'typeorm';
 import { Module, Injectable } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -22,7 +23,7 @@ export class CoffeeBrandsFactory {
 }
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
   controllers: [CoffeesController],
   providers: [
     CoffeesService,
